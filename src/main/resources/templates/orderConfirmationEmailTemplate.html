@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml" >
+
+<head>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/css/normalize.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+<style>
+    table{
+        border-collapse: collapse;
+    }
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>
+</head>
+<body>
+<p><span th:text="${user.firstName}"></span>, спасибо за Ваш заказ! <strong>№<span th:text="${order.id}"></span></strong></p>
+<h3>Детали заказа:</h3>
+<hr/>
+<table>
+    <tr>
+        <th>Адрес доставки</th>
+    </tr>
+    <tr>
+        <td><span th:text="${order.shippingAddress}"></span></td>
+    </tr>
+    <tr>
+        <th>Получатель</th>
+    </tr>
+    <tr>
+        <td><span th:text="${order.lastNameRecipient}+' '+${order.firstNameRecipient}+' '+${order.fatherNameRecipient}"></span></td>
+    </tr>
+    <tr>
+        <th>Телефон получателя</th>
+    </tr>
+    <tr>
+        <td><span th:text="${order.phoneRecipient}"></span></td>
+    </tr>
+</table>
+<h4>Состав заказа</h4>
+<table>
+    <thead>
+    <tr>
+        <td><strong>Товар</strong></td>
+        <td class="text-center"><strong>Количество</strong></td>
+        <td class="text-center"><strong>Цена товара</strong></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cartItem : ${cartItemList}">
+        <td><span data-th-text="${cartItem.product.name}"></span></td>
+        <td class="text-center" data-th-text="${cartItem.qty}"></td>
+        <td class="text-center" data-th-text="${cartItem.product.price}"></td>
+    </tr>
+    <tr>
+        <td class="highrow"></td>
+        <td class="highrow text-center"><strong>Общая стоимость</strong></td>
+        <td class="highrow text-right" data-th-text="${order.orderTotal}"></td>
+    </tr>
+    </tbody>
+</table>
+<br/>
+<p>   Всегда рады Вам!</p>
+</body>
+</html>

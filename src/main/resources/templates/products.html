@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml" >
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+<div th:replace="common/header :: header" />
+    <section class="category">
+        <div class="container">
+            <div class="category__title">
+                Наша продукция
+            </div>
+            <div class="cateroty__first-row">
+                <a class="category__item-1" th:href="@{/products/classic-cakes(category='classic_cakes')}">
+                    <img src="img/category/classictort.jpg" class="image" alt="" />
+                    <div class="category__item-text">
+                        Классические торты
+                    </div>
+                </a>
+                <a class="category__item-1" th:href="@{/products/cheesecakes(category='cheesecakes')}">
+                    <img src="img/category/chezcake1.jpg" alt="" />
+                    <div class="category__item-text">
+                        Чизкейки
+                    </div>
+                </a>
+                <a class="category__item-1" th:href="@{/products/sponge_cakes(category='sponge_cakes')}">
+                    <img src="img/category/biskvit.jpg" alt="" />
+                    <div class="category__item-text">
+                        Бисквитные торты
+                    </div>
+                </a>
+            </div>
+            <div class="cateroty__sec-row">
+                <a class="category__item-1" th:href="@{/products/cookies(category='cookies')}">
+                    <img src="img/category/shokoladnie.jpg" class="image" alt="" />
+                    <div class="category__item-text">
+                        Печенье
+                    </div>
+                </a>
+                <a class="category__item-1" th:href="@{/products/cakes(category='cakes')}">
+                    <img src="img/category/donuts-268250_640.jpg" class="image" alt="" />
+                    <div class="category__item-text">
+                        Пироженные
+                    </div>
+                </a>
+                <a class="category__item-1" th:href="@{/products/jams(category='jams')}">
+                    <img src="img/category/jam.jpg" class="image" alt=""/>
+                    <div class="category__item-text">
+                        Джемы
+                    </div>
+                </a>
+
+            </div>
+            <div class="cateroty__thrd-row">
+                <a class="category__item-1" th:href="@{/products/cupcakes(category='cupcakes')}">
+                    <img src="img/category/cupcakes.jpg" class="image" alt=""/>
+                    <div class="category__item-text">
+                        Капкейки
+                    </div>
+                </a>
+                <a class="category__item-1" th:href="@{/products/chocolate_and_sweets(category='chocolate_and_sweets')}">
+                    <img src="img/category/chocolate.jpg" class="image" alt=""/>
+                    <div class="category__item-text">
+                        Шоколад и конфеты
+                    </div>
+                </a>
+                <a class="category__item-1" th:href="@{/products/mousse_cakes(category='mousse_cakes')}">
+                    <img src="img/category/mousse-cake.jpg" class="image" alt=""/>
+                    <div class="category__item-text">
+                        Муссовые торты
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+<div th:replace="common/footer :: footer" />
+
+</body>
+
+</html>

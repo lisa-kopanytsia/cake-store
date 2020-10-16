@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+<div th:replace="common/header :: header" />
+<section class="getorder">
+        <div class="container">
+            <div class="getorder__title">
+                Как сделать заказ?
+            </div>
+            <div class="getorder__text">
+                <p>Сделать заказ Вы можете следующим образом:</p>
+                <ol>
+                    <li>1) Оформите заказ на сайте</li>
+                    <li>2) Позвонить нам по телефону <a class="getorder__phone" href="tel:3809000000">+38 (090)
+                            000-00-00.</a></li>
+                    <li>3) Написать нам в Viber, Telegram или директ в Инстаграм.</li>
+                </ol>
+                <p><strong>Обратите внимание!</strong></p>
+                <p>Заказы бисквитных тортов, чизкейков, капкейков, печенья принимаются за 24 часа,
+                    заказы муссовых тортов принимаются за 48 часов.</p>
+            </div>
+        </div>
+    </section>
+    <section class="delivery">
+        <div class="container">
+            <div class="delivery__top">
+                <div class="delivery__title">
+                    Доставка
+                </div>
+                <div class="delivery__text">
+                    Вы можете выбрать наиболее удобный для себя способ доставки:
+                </div>
+            </div>
+            <div class="delivery__items">
+                <div class="delivery__item">
+                    <img src="img/delivery/truck1.png" alt="" />
+                    <div class="delivery__item-title">
+                        <strong>Адресная доставка по Киеву и области</strong>
+                    </div>
+                    <div class="delivery__item-text">
+                        <p>Стоимость доставки по Киеву от 60-140 грн, в зависимости от района, доставка по области рассчитывается индивидуально.</p>
+                        <p> При сумме заказа от 2 000 грн., доставка по Киеву БЕСПЛАТНАЯ.</p>
+                    </div>
+                </div>
+                <div class="delivery__item">
+                    <img src="img/delivery/address1.png" alt="" />
+                    <div class="delivery__item-title">
+                        <strong>Самовывоз</strong>
+                    </div>
+                    <div class="delivery__item-text">
+                        <p>Готовые десерты Вы можете забрать самовывозом ежедневно по адресу: г. Киев, Ваш адрес</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+<div th:replace="common/footer :: footer" />
+</body>
+
+</html>

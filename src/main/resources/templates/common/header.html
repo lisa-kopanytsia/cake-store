@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:fragment="common-header">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Cakes Store</title>
+	<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;family=Roboto:wght@400;500&amp;display=swap"
+		  rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&amp;display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="/css/normalize.css" />
+	<link rel="stylesheet" href="/css/fonts.css" />
+		<link rel="stylesheet" href="/css/style.css" />
+
+</head>
+
+<body>
+
+	<div th:fragment="header">
+		<div class="header__top">
+		<div class="container">
+			<div class="header__account">
+				<ul class="navbar-right1">
+					<li style="padding-left: 0px;padding-right: 0px;"><a sec:authorize="isAnonymous()" th:href="@{/login}">Авторизация</a></li>
+					<li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Выход</a></li>
+					<li><a sec:authorize="isAuthenticated()" th:href="@{/myProfile}">Мой аккаунт</a></li>
+				</ul>
+			</div>
+			<div class="header__contact">
+				<a class="header__phone" href="tel:3809000000">+38 (090) 000-00-00</a>
+				<a class="header__email" href="#">vashadres@i.ua</a>
+				<a class="header__btn" th:href="@{/shoppingCart/cart}">Корзина</a>
+			</div>
+		</div>
+		</div>
+	<div class="header__content">
+		<div class="container">
+			<nav class="menu">
+				<ul>
+					<li><a href="/">Главная</a></li>
+					<li><a href="/products">Продукция</a></li>
+					<li><img src="/img/cakeslogo.png" alt="" /></li>
+					<li><a href="/dostavka-oplata">Доставка и оплата</a></li>
+					<li><a href="/contacts">Контакты</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	</div>
+
+
+</body>
+</html>

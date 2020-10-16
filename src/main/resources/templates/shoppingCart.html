@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml" >
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+<head th:replace="common/header :: header"/>
+
+
+<div class="container">
+    <div class="row" style="margin-bottom: -100px;">
+        <div class="col-xs-8">
+            <h2 class="section-headline">
+                <h2 class="section-headline" style="padding-top: 30px;padding-bottom: 40px;">
+                    <span th:text="${user}? ${#strings.toUpperCase(user.username)} : 'Товары в корзине'"></span>
+                </h2>
+            </h2>
+        </div>
+
+    </div>
+
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-6 text-left" style="padding-bottom: 15px;">
+                    <a class="btn btn-primary" th:href="@{/products}">Продолжить покупки</a>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <a class="btn btn-primary" th:href="@{/checkout(id=${shoppingCart.id})}">Оформить заказ</a>
+                </div>
+                <br />
+                <div th:if="${emptyCart}" class="alert alert-warning" style="margin: 10px;">
+                    <h4 class="mess-warning">Ой, а у Вас пустая корзина. Добавьте вкусняху в корзину ;)</h4>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8"><h4>Товары</h4></div>
+                    <div class="col-xs-2"><h4>Цена</h4></div>
+                    <div class="col-xs-2"><h4>Количество</h4></div>
+                </div>
+                <!-- Отображение товаров в козине -->
+                <div class="row" th:each="cartItem : ${cartItemList}">
+                    <form th:action="@{/shoppingCart/updateCartItem}" method="post">
+                        <hr/>
+                        <div class="col-xs-2">
+
+                            <a th:href="@{/productDetail(id=${cartItem.product.id})}">
+                                <img class="img-responsive product" th:src="#{adminPath}+@{/img/product/}+${cartItem.product.id}+'.png'" />
+                            </a>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="center-block" style="margin-top: 10px;">
+                                <div class="cb-1">
+                                <a th:href="@{/productDetail?id=}+${cartItem.product.id}"><h4 th:text="${cartItem.product.name}"></h4></a>
+                                </div>
+                                <div class="cb-2">
+                                <a th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}">Удалить товар</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-2">
+                            <h5 style="color: #db3208; font-size: large;"><span th:text="${cartItem.product.price}"></span>грн</h5>
+                        </div>
+                        <div class="col-xs-2">
+                            <input hidden="hidden" name="id" th:value="${cartItem.id}" />
+                            <input th:id="${cartItem.id}" th:name="qty" class="form-control cartItemQty" style="margin-top: 25px;" th:value="${cartItem.qty}"/>
+                            <button style="display: none;" th:id="'update-item-'+${cartItem.id}" type="submit" class="btn btn-warning btn-xs"> Обновить </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <hr/>
+                    <h4 class="col-xs-12 text-right"><strong style="font-size: large;">Общая стоимость (<span th:text="${#lists.size(cartItemList)}"> </span> товаров):</strong><span style="color: #db3208; font-size: large;"><span th:text="${shoppingCart.grandTotal}"></span></span> грн</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+<script th:src="@{/js/scripts.js}"></script>
+
+<div th:replace="common/footer :: footer"/>
+</body>
+</html>

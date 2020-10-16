@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml" >
+
+
+<head>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+</head>
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+<div th:replace="common/header :: header" />
+
+<div class="container">
+    <div class="row" style="margin-bottom: -100px;">
+        <div class="col-xs-8">
+            <h2 class="section-headline">
+                <span>Оформление заказа</span>
+            </h2>
+        </div>
+    </div>
+
+    <div class="checkout-info" style="margin-top: 10px;">
+        <form th:action="@{/checkout}" method="post">
+            <div class="col-xs-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <button type="submit" class="btn btn-warning btn-block">Оформить заказ</button>
+                        <hr/>
+                        <h3>Итого к оплате</h3>
+                        <div class="row">
+                            <div class="col-xs-7 text-left">
+                                Товаров на сумму:
+                            </div>
+                            <div class="col-xs-5 text-right">
+                                <span th:text="${shoppingCart.grandTotal}"> грн</span>
+                            </div>
+                        </div>
+                        <div class="panel-footer">Без учета доставки, доставка просчитывается индивидуально в зависимости от объема заказа и Вашего района</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- информация по заказу -->
+            <div class="col-xs-8">
+                <div th:if="${missingRequiredField}">
+                    <h5 class="alert alert-warning">Не все поля заполнены. Заполните поля со *</h5>
+                </div>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#shippingInfo"> 1. Адрес доставки </a>
+                            </h4>
+                        </div>
+                        <div class="form-group">
+                            <label for="shippingAddress" style="padding: 10px;">* Адрес</label> <input type="text" class="form-control" style="width: 95%; margin-left: 15px;" id="shippingAddress"  name="shippingAddress" th:value="${shippingAddress}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="firstNameRecipient" style="padding: 10px;">* Имя Получателя</label> <input type="text" class="form-control" style="width: 95%; margin-left: 15px;" id="firstNameRecipient"  name="firstNameRecipient" th:value="${firstNameRecipient}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="lastNameRecipient" style="padding: 10px;">* Фамилия Получателя</label> <input type="text" class="form-control" style="width: 95%; margin-left: 15px;" id="lastNameRecipient"  name="lastNameRecipient" th:value="${lastNameRecipient}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="fatherNameRecipient" style="padding: 10px;">* Отчество Получателя</label> <input type="text" class="form-control" style="width: 95%; margin-left: 15px;" id="fatherNameRecipient"  name="fatherNameRecipient" th:value="${fatherNameRecipient}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneRecipient" style="padding: 10px;">* Телефон Получателя</label> <input type="text" class="form-control" style="width: 95%; margin-left: 15px;" id="phoneRecipient"  name="phoneRecipient" th:value="${phoneRecipient}" />
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#shippingInfo"> 2. Оплата </a>
+                            </h4>
+                        </div>
+                        <div class="row">
+                            <div class="alert alert-warning" style="width: 90%;margin-left: 30px; margin-top: 10px;">Оплата наличными курьеру.</div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#reviewItems">
+                                    3. Товары в заказе
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="reviewItems" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        <h4>Товары</h4>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <h4>Цена</h4>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <h4>Количество</h4>
+                                    </div>
+                                </div>
+                                <div class="row" th:each="cartItem : ${cartItemList}">
+
+                                        <hr/>
+                                        <div class="col-xs-2">
+                                            <a th:href="@{/products/(${product.category})/productDetail(id=${cartItem.product.id})}">
+                                                <img class="img-responsive product" th:src="#{adminPath}+@{/img/product/}+${cartItem.product.id}+'.png'" style="width: 70px;" />
+                                            </a>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="center-block" style="margin-top: 10px;">
+                                                <div class="cb-1">
+                                                    <a th:href="@{/productDetail?id=}+${cartItem.product.id}"><h4 th:text="${cartItem.product.name}"></h4></a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-2">
+                                            <h5 style="color: #db3208; font-size: large;"><span th:text="${cartItem.product.price}"></span>грн</h5>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <h5 style="font-size: large;" th:text="${cartItem.qty}"></h5>
+                                        </div>
+
+                                </div>
+                                <hr/>
+                                <h4 class="col-xs-12 text-right"><strong style="font-size: large;">Общая стоимость (<span th:text="${#lists.size(cartItemList)}"> </span> товаров):</strong><span style="color: #db3208; font-size: large;"><span th:text="${shoppingCart.grandTotal}"></span></span> грн</h4>
+
+                                <br/><br/>
+                                <button type="submit" class="btn btn-warning btn-block">Оформить заказ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<div th:replace="common/footer :: footer" />
+
+</body>
+
+</html>
